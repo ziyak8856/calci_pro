@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE_NAME = 'calci_pro'
-        GITHUB_REPO_URL = 'https://github.com/deadlock1234/Spe_calci.git'
+        GITHUB_REPO_URL = 'https://github.com/ziyak8856/calci_pro.git'
         MAVEN_HOME = '/usr/bin/mvn'
 
     }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'docker buildx build -t spe_calculator .'
+                    sh 'docker buildx build -t calci_pro .'
                 }
             }
         }
@@ -36,8 +36,8 @@ pipeline {
                 script {
 
                     // Tag and push Docker image to Docker Hub using id pass
-                   sh "docker tag spe_calculator akshat2804/spe_calculator:latest"
-                   sh "docker push akshat2804/spe_calculator:latest"
+                   sh "docker tag calci_pro ziyak8856532/calci_pro:latest"
+                   sh "docker push ziyak88565324/calci_pro:latest"
 
                 }
             }
