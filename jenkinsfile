@@ -1,13 +1,11 @@
 pipeline {
     agent any
-
     environment {
         DOCKER_IMAGE_NAME = 'calci_pro'
         GITHUB_REPO_URL = 'https://github.com/ziyak8856/calci_pro.git'
         MAVEN_HOME = '/usr/bin/mvn'
-        DOCKER_PASSWORD = 'ziya@8856'
-    }
 
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -17,43 +15,37 @@ pipeline {
                 }
             }
         }
-
         stage('Maven Build') {
-            steps {
-                script {
-                    env.PATH = "${env.MAVEN_HOME}/bin:${env.PATH}"
-                    sh 'mvn clean install'
+                    steps {
+                        script {
+                            env.PATH = "${env.MAVEN_HOME}/bin:${env.PATH}"
+                            sh 'mvn clean install'
+                        }
+                    }
                 }
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
                     // Build Docker image
-                    sh 'docker build -t calci_pro .'
+                    sh 'echo  docker buildx build -t calci_pro .'
                 }
             }
         }
-
-        stage('Push Docker Image') {
+        stage('Push Docker Images') {
             steps {
                 script {
-                    // Log in to Docker Hub
-                    sh "echo ${DOCKER_PASSWORD} | docker login -u ziyak8856532 --password-stdin"
 
-                    // Tag and push Docker image to Docker Hub
-                    sh 'docker tag calci_pro ziyak8856532/calci_pro:latest'
-                    sh 'docker push ziyak8856532/calci_pro:latest'
+                        sh "echo "ziya@8856" | sudo -S docker tag calci_pro ziyak8856532/calci_pro:latest"
+                        sh "sudo docker push ziyak8856532/calci_pro:latest"
+
                 }
             }
         }
-
         stage('Run Ansible Playbook') {
             steps {
                 script {
                     // Run Ansible playbook
-                    sh '/usr/bin/ansible-playbook -i inventory deploy.yml'
+                    sh "/usr/bin/ansible-playbook -i inventory deploy.yml"
                 }
             }
         }
