@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'sudo docker buildx build -t calci_pro .'
+                    sh 'echo "12345" | sudo -S docker buildx build -t calci_pro .'
                 }
             }
         }
