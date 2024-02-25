@@ -37,12 +37,8 @@ pipeline {
 
                     // Tag and push Docker image to Docker Hub using id pass
                     // Authenticate with Docker Hub using credentials
-                                       withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'ziyak8856532', passwordVariable: 'Ziya\\@8856')]) {
-                                           // Tag and push Docker image to Docker Hub
-                                           sh "docker tag calci_pro ${ziyak8856532}/calci_pro:latest"
-                                           sh "docker login -u ${ziyak8856532} -p ${Ziya\\@8856}"
-                                           sh "docker push ${ziyak8856532}/calci_pro:latest"
-
+                                      sh "docker tag calci_pro ziyak8856532/calci_pro:latest"
+                                      sh "docker push ziyak8856532/calci_pro:latest"
                 }
             }
         }
