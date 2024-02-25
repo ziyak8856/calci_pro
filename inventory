@@ -1,1 +1,1 @@
-localhost ansible_user=ziyaurraheman ansible_ssh=Ziya@8856
+localhost ansible_user=ziyaurraheman ansible_ssh_pass=''''
