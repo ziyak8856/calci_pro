@@ -34,11 +34,10 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 script {
-
-                    // Tag and push Docker image to Docker Hub using id pass
-                    // Authenticate with Docker Hub using credentials
-                                      sh "docker tag calci_pro ziyak8856532/calci_pro:latest"
-                                      sh "docker push ziyak8856532/calci_pro:latest"
+                    docker.withRegistry('', 'DockerHubCred') {
+                        sh "docker tag calci_pro ziyak8856532/calci_pro:latest"
+                        sh "docker push ziyak8856532/calci_pro:latest"
+                    }
                 }
             }
         }
