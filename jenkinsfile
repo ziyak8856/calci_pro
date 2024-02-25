@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'echo "Ziya@8856" | sudo -S docker buildx build -t calci_pro .'
+                    sh 'echo "Ziya@8856" | -S docker buildx build -t calci_pro .'
                 }
             }
         }
