@@ -35,8 +35,8 @@ pipeline {
             steps {
                 script {
 
-                     sh "echo '12345' | sudo -S docker tag calci_pro ziyak8856532/calci_pro:latest"
-                     sh "echo '12345' | sudo -S docker push ziyak8856532/calci_pro:latest"
+                     sh "echo docker tag calci_pro ziyak8856532/calci_pro:latest"
+                     sh "echo  -S docker push ziyak8856532/calci_pro:latest"
                 }
             }
         }
