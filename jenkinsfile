@@ -34,10 +34,10 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 script {
-                    docker.withRegistry('', 'DockerHubCred') {
+                    
                         sh "docker tag calci_pro ziyak8856532/calci_pro:latest"
                         sh "docker push ziyak8856532/calci_pro:latest"
-                    }
+
                 }
             }
         }
