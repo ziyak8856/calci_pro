@@ -37,7 +37,7 @@ pipeline {
 
                     // Tag and push Docker image to Docker Hub using id pass
                    sh "docker tag calci_pro ziyak8856532/calci_pro:latest"
-                   sh "docker push ziyak88565324/calci_pro:latest"
+                   sh "docker push ziyak8856532/calci_pro:latest"
 
                 }
             }
