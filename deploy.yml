@@ -9,7 +9,10 @@
       docker_image:
         name: "calci_pro"
         source: pull
+        api_version: auto
+        timeout: 60
       register: docker_pull_result
+    
 
     - name: Display Docker Pull Result
       debug:
