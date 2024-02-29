@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                     // Run Ansible playbook
-                    sh "/usr/bin/ansible-playbook -i inventory deploy.yml"
+                   sh "ansible-playbook -i inventory deploy.yml"
                 }
             }
         }
