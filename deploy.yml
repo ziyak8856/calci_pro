@@ -13,17 +13,23 @@
         timeout: 60
       register: docker_pull_result
 
-
     - name: Display Docker Pull Result
       debug:
         var: docker_pull_result
 
-    - name: Start Docker service
+    - name: Gather Docker service facts
+      service_facts:
+
+    - name: Start Docker service (if not already running)
       service:
         name: docker
         state: started
-      when: ansible_facts['os_family'] == "Debian"
+      when: "'docker' in ansible_facts.services and ansible_facts.services['docker'].state != 'running'"
 
-    - name: Running container
-      shell: /usr/bin/docker run -it -d --name calci_pro calci_pro
-      # Add ansible_ssh_port if SSH is running on a non-default port
+    - name: Run Docker container
+      docker_container:
+        name: calci_pro
+        image: calci_pro
+        state: started
+        interactive: false
+        detach: true
