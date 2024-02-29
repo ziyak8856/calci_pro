@@ -44,7 +44,7 @@ pipeline {
             steps {
                 script {
                      // Define the sudo password
-                                        def sudoPassword = "12345"
+                                        def sudoPassword = "Ziya@8856"
 
                                         // Run Ansible playbook with sudo and provide password
                                         sh "echo '${sudoPassword}' | sudo -S ansible-playbook -i inventory deploy.yml"
