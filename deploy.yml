@@ -19,7 +19,7 @@
 
     - name: Gather Docker service facts
       service_facts:
-        gather_facts: no
+
 
     - name: Start Docker service (if not already running)
       service:
