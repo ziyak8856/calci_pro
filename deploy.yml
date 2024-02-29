@@ -22,3 +22,4 @@
 
     - name: Running container
       shell: /usr/bin/docker run -it -d --name calci_pro calci_pro
+      # Add ansible_ssh_port if SSH is running on a non-default port
