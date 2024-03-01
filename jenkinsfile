@@ -43,11 +43,14 @@ pipeline {
        stage('Run Ansible Playbook') {
            steps {
                script {
-                   // Define the sudo password
-                   sh "echo 'Ziya@8856' | sudo -S ansible-playbook -i inventory deploy.yml"
+                   // Provide sudo password and run Ansible playbook
+                   sh """
+                   echo -n '12345' | sudo -S ansible-playbook -i inventory deploy.yml
+                   """
                }
            }
        }
+
 
     }
 }
