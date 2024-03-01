@@ -18,20 +18,13 @@
         var: docker_pull_result
 
     - name: Gather Docker service facts
-      command: systemctl is-active docker
-      register: docker_service_status
-      ignore_errors: true
+      service_facts:
 
     - name: Start Docker service (if not already running)
       service:
         name: docker
         state: started
-      when: docker_service_status.stdout != 'active'
+      when: "'docker' in ansible_facts.services and ansible_facts.services['docker'].state != 'running'"
 
-    - name: Run Docker container
-      docker_container:
-        name: calci_pro
-        image: calci_pro
-        state: started
-        interactive: false
-        detach: true
+    - name: Pull Docker image to local
+      command: docker pull calci_pro
