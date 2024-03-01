@@ -4,7 +4,6 @@ pipeline {
         DOCKER_IMAGE_NAME = 'calci_pro'
         GITHUB_REPO_URL = 'https://github.com/ziyak8856/calci_pro.git'
         MAVEN_HOME = '/usr/bin/mvn'
-
     }
     stages {
         stage('Checkout') {
@@ -16,41 +15,40 @@ pipeline {
             }
         }
         stage('Maven Build') {
-                    steps {
-                        script {
-                            env.PATH = "${env.MAVEN_HOME}/bin:${env.PATH}"
-                            sh 'mvn clean install'
-                        }
-                    }
+            steps {
+                script {
+                    env.PATH = "${env.MAVEN_HOME}/bin:${env.PATH}"
+                    sh 'mvn clean install'
                 }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
                     // Build Docker image
-                    sh 'echo  docker buildx build -t calci_pro .'
+                    sh "docker build -t ${env.DOCKER_IMAGE_NAME} ."
                 }
             }
         }
-        stage('Push Docker Images') {
+        stage('Push Docker Image') {
             steps {
                 script {
-
-                     sh "echo docker tag calci_pro ziyak8856532/calci_pro:latest"
-                     sh "echo  -S docker push ziyak8856532/calci_pro:latest"
+                    // Tag Docker image
+                    sh "docker tag ${env.DOCKER_IMAGE_NAME} ziyak8856532/${env.DOCKER_IMAGE_NAME}:latest"
+                    // Push Docker image
+                    sh "docker push ziyak8856532/${env.DOCKER_IMAGE_NAME}:latest"
                 }
             }
         }
-       stage('Run Ansible Playbook') {
-           steps {
-               script {
-                   // Provide sudo password and run Ansible playbook
-                   sh """
-                   echo -n '12345' | sudo -S ansible-playbook -i inventory deploy.yml
-                   """
-               }
-           }
-       }
-
-
+        stage('Run Ansible Playbook') {
+            steps {
+                script {
+                    // Provide sudo password and run Ansible playbook
+                    sh """
+                    echo -n '12345' | sudo -S ansible-playbook -i inventory deploy.yml
+                    """
+                }
+            }
+        }
     }
 }
