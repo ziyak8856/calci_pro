@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     // Authenticate to Docker Hub with secure credentials (replace with actual code)
-                    withCredentials([usernamePassword(credentialsId: "${env.DOCKER_HUB_CREDENTIALS_ID}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: "${env.DOCKER_HUB_CREDENTIALS_ID}", usernameVariable: 'docker_hub_access', passwordVariable: 'Ziya@8856')]) {
                         sh "docker login -u $USERNAME -p $PASSWORD" // Replace with secure credential access steps
                     }
 
