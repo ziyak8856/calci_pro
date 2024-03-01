@@ -1,5 +1,5 @@
 ---
-- name: Pull Docker Image from Docker Hub and Run Container
+- name: Pull Docker Image from Docker Hub
   hosts: localhost
   connection: local
   remote_user: ziyaurraheman
@@ -12,6 +12,7 @@
         api_version: auto
         timeout: 60
       register: docker_pull_result
+      ignore_errors: true
 
     - name: Display Docker Pull Result
       debug:
@@ -28,13 +29,11 @@
         state: started
       when: docker_service_status.stdout != 'active'
 
-    - name: Pull Docker Image Locally
-      command: docker pull calci_pro
-
-    - name: Run Docker container
-      docker_container:
-        name: calci_pro
-        image: calci_pro
-        state: started
-        interactive: false
-        detach: true
+    - name: Handle Docker image pull errors
+      block:
+        - name: Pull Docker image to local
+          command: docker pull calci_pro
+      rescue:
+        - name: Display error message
+          debug:
+            msg: "Failed to pull the Docker image. Check if the image exists, and ensure proper permissions and authentication."
