@@ -38,9 +38,12 @@ pipeline {
             steps {
                 script {
                     // Authenticate to Docker Hub with secure credentials (replace with actual code)
-                    withCredentials([usernamePassword(credentialsId: "${env.DOCKER_HUB_CREDENTIALS_ID}", usernameVariable: 'ziyak8856532', passwordVariable: 'Ziya@8856')]) {
-                        sh "docker login -u $USERNAME -p $PASSWORD" // Replace with secure credential access steps
+                    // Authenticate to Docker Hub with secure credentials
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh "docker login -u $ziyak8856532 -p $Ziya@8856"
                     }
+
+
 
                     // Tag Docker image
                     sh "docker tag ${env.DOCKER_IMAGE_NAME} ziyak8856532/${env.DOCKER_IMAGE_NAME}:latest"
