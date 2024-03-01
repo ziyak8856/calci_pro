@@ -6,7 +6,7 @@ pipeline {
         GITHUB_REPO_URL = 'https://github.com/ziyak8856/calci_pro.git'
         MAVEN_HOME = '/usr/bin/mvn'
         // Credentials ID for Docker Hub authentication
-        DOCKER_HUB_CREDENTIALS_ID = 'docker_hub_access' // Replace with your actual ID
+        DOCKER_HUB_CREDENTIALS_ID = '12345' // Replace with your actual ID
     }
 
     stages {
