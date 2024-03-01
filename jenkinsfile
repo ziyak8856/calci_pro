@@ -46,10 +46,10 @@ pipeline {
 
 
                     // Tag Docker image
-                    sh "docker tag ${env.DOCKER_IMAGE_NAME} ziyak8856532/${env.DOCKER_IMAGE_NAME}:latest"
+                   sh "docker tag ${env.DOCKER_IMAGE_NAME} ziyak8856532/${env.DOCKER_IMAGE_NAME}:latest"
 
-                    // Push Docker image using credentials
-                    sh "docker push ziyak8856532/${env.DOCKER_USERNAME}:latest"
+                   // Push Docker image using credentials
+                   sh "docker push ziyak8856532/${env.DOCKER_IMAGE_NAME}:latest"
                 }
             }
         }
