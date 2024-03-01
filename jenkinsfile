@@ -53,16 +53,14 @@ pipeline {
                 }
             }
         }
-        stage('Run Ansible Playbook') {
-            steps {
-                script {
-                    // Prompt for sudo password instead of hardcoding (security risk)
-                    sh """
-                    read -p "Enter sudo password (will not be displayed): " PASSWORD
-                    echo -n "\${PASSWORD}" | sudo -S ansible-playbook -i inventory deploy.yml
-                    """
-                }
-            }
-        }
+       stage('Run Ansible Playbook') {
+           steps {
+               script {
+                   // Run Ansible playbook without sudo
+                   sh "ansible-playbook -i inventory deploy.yml"
+               }
+           }
+       }
+
     }
 }
