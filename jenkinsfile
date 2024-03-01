@@ -1,10 +1,14 @@
 pipeline {
     agent any
+
     environment {
         DOCKER_IMAGE_NAME = 'calci_pro'
         GITHUB_REPO_URL = 'https://github.com/ziyak8856/calci_pro.git'
         MAVEN_HOME = '/usr/bin/mvn'
+        // Credentials ID for Docker Hub authentication
+        DOCKER_HUB_CREDENTIALS_ID = 'docker_hub_access' // Replace with your actual ID
     }
+
     stages {
         stage('Checkout') {
             steps {
@@ -33,19 +37,26 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
+                    // Authenticate to Docker Hub with secure credentials (replace with actual code)
+                    withCredentials([usernamePassword(credentialsId: "${env.DOCKER_HUB_CREDENTIALS_ID}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh "docker login -u $USERNAME -p $PASSWORD" // Replace with secure credential access steps
+                    }
+
                     // Tag Docker image
                     sh "docker tag ${env.DOCKER_IMAGE_NAME} ziyak8856532/${env.DOCKER_IMAGE_NAME}:latest"
-                    // Push Docker image
-                    sh "docker push ziyak8856532/${env.DOCKER_IMAGE_NAME}:latest"
+
+                    // Push Docker image using credentials
+                    sh "docker push ziyak8856532/${env.DOCKER_USERNAME}:latest"
                 }
             }
         }
         stage('Run Ansible Playbook') {
             steps {
                 script {
-                    // Provide sudo password and run Ansible playbook
+                    // Prompt for sudo password instead of hardcoding (security risk)
                     sh """
-                    echo -n '12345' | sudo -S ansible-playbook -i inventory deploy.yml
+                    read -p "Enter sudo password (will not be displayed): " PASSWORD
+                    echo -n "\${PASSWORD}" | sudo -S ansible-playbook -i inventory deploy.yml
                     """
                 }
             }
