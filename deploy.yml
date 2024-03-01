@@ -1,5 +1,5 @@
 ---
-- name: Pull Docker Image from Docker Hub
+- name: Pull Docker Image from Docker Hub and Run Container
   hosts: localhost
   connection: local
   remote_user: ziyaurraheman
@@ -27,6 +27,9 @@
         name: docker
         state: started
       when: docker_service_status.stdout != 'active'
+
+    - name: Pull Docker Image Locally
+      command: docker pull calci_pro
 
     - name: Run Docker container
       docker_container:
