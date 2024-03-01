@@ -18,14 +18,15 @@
         var: docker_pull_result
 
     - name: Gather Docker service facts
-      service_facts:
-
+      command: systemctl is-active docker
+      register: docker_service_status
+      ignore_errors: true
 
     - name: Start Docker service (if not already running)
       service:
         name: docker
         state: started
-      when: "'docker' in ansible_facts.services and ansible_facts.services['docker'].state != 'running'"
+      when: docker_service_status.stdout != 'active'
 
     - name: Run Docker container
       docker_container:
