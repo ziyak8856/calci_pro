@@ -40,13 +40,14 @@ pipeline {
                 }
             }
         }
-        stage('Run Ansible Playbook') {
-            steps {
-                script {
-                     // Define the sudo password
-                                       sh "ansible-playbook -i inventory deploy.yml"
-                }
-            }
-        }
+       stage('Run Ansible Playbook') {
+           steps {
+               script {
+                   // Define the sudo password
+                   sh "echo '12345' | sudo -S ansible-playbook -i inventory deploy.yml"
+               }
+           }
+       }
+
     }
 }
