@@ -40,7 +40,7 @@ pipeline {
                     // Authenticate to Docker Hub with secure credentials (replace with actual code)
                     // Authenticate to Docker Hub with secure credentials
                     withCredentials([usernamePassword(credentialsId: 'Ziya1', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh "docker login -u $ziyak8856532 -p $Ziya@8856"
+                        sh "docker login -u $USERNAME -p $PASSWORD"
                     }
 
 
