@@ -6,7 +6,7 @@ pipeline {
         GITHUB_REPO_URL = 'https://github.com/ziyak8856/calci_pro.git'
         MAVEN_HOME = '/usr/bin/mvn'
         // Credentials ID for Docker Hub authentication
-        DOCKER_HUB_CREDENTIALS_ID = 'Ziya' // Replace with your actual ID
+        DOCKER_HUB_CREDENTIALS_ID = 'Ziya1' // Replace with your actual ID
     }
 
     stages {
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     // Authenticate to Docker Hub with secure credentials (replace with actual code)
-                    withCredentials([usernamePassword(credentialsId: "${env.DOCKER_HUB_CREDENTIALS_ID}", usernameVariable: 'Ziya', passwordVariable: '12345')]) {
+                    withCredentials([usernamePassword(credentialsId: "${env.DOCKER_HUB_CREDENTIALS_ID}", usernameVariable: 'ziyak8856532', passwordVariable: 'Ziya@8856')]) {
                         sh "docker login -u $USERNAME -p $PASSWORD" // Replace with secure credential access steps
                     }
 
