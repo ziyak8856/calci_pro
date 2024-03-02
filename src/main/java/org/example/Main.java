@@ -22,14 +22,14 @@ public class Main {
         }
     }
 
-    static double exponent(double x, double exponent) {
+    static double exponent (double x, double exponent) {
         return Math.pow(x, exponent);
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int choice;
-        double operand;
+        double choice; // Change int to double
+        double operand; // Change int to double
 
         do {
             // Display menu
@@ -40,9 +40,9 @@ public class Main {
             System.out.println("4. Power (x^y)");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
+            choice = scanner.nextDouble(); // Read input as double
 
-            switch (choice) {
+            switch ((int) choice) { // Cast choice to int
                 case 1:
                     System.out.print("Enter the operand: ");
                     operand = scanner.nextDouble();
